@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/estudiantes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ isEditMode ? 'Editar Estudiante' : 'Agregar Estudiante' }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">Nombre</ion-label>
+    <ion-input
+      formControlName="nombre"
+      placeholder="Ingrese el nombre"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Edad</ion-label>
+    <ion-input
+      formControlName="edad"
+      placeholder="Ingrese la edad"
+      type="number"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item *ngFor="let control of notas.controls; let i = index">
+    <ion-label position="stacked">Nota {{ i + 1 }}</ion-label>
+    <ion-input formControlName="{{ i }}"></ion-input>
+  </ion-item>
+
+  <ion-button
+    expand="full"
+    [disabled]="estudianteForm.invalid"
+    (click)="guardarEstudiante()"
+  >
+    {{ isEditMode ? 'Actualizar' : 'Agregar' }} Estudiante
+  </ion-button>
+</ion-content>

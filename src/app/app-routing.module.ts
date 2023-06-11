@@ -1,22 +1,30 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { EstudiantesComponent } from './estudiantes/estudiantes.component';
+import { AgregarEstudianteComponent } from './agregar-estudiante/agregar-estudiante.component';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'estudiantes',
+    component: EstudiantesComponent,
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'estudiantes/agregar',
+    loadChildren: () =>
+      import('./agregar-estudiante/agregar-estudiante.component').then(
+        (m) => m.AgregarEstudianteComponent
+      ),
   },
+ 
+    {
+      path: '',
+      component: AgregarEstudianteComponent,
+    },
+ 
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
